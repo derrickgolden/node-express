@@ -1,25 +1,17 @@
-const EventEmitter = require('events')
-const http = require('http')
 
-const server = http.createServer((req,res)=>{
+const express = require('express')
+const app = express()
 
+const path = require('path')
+
+// app.use(express.static('navbar-app'))
+
+app.get('/', (req,res) =>{
+    // res.sendFile(path.resolve(__dirname,'navbar-app','index.html'))
+    res.json([{name:"Derrick"}])
 })
 
-server.on("request", (req, res) =>{
-    res.write("hello wolrd")
-    res.end()
+app.all('*',(req, res)=>{
+    res.status(404).send('<h1>resource not found</h1>')
 })
-
-const customEmitter = new EventEmitter()
-const customEmitt = new EventEmitter()
-customEmitter.on("request", () =>{
-    console.log("request")
-})
-customEmitt.on("request", () =>{
-    console.log("request2")
-})
-
-server.listen(8000)
-
-customEmitter.emit("request")
-customEmitt.emit("request")
+app.listen(5001, ()=> console.log("listening..."))
