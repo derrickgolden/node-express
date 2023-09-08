@@ -68,7 +68,9 @@
         const nameValue = input.value
 
         try {
-          const { data } = await axios.post('/api/people', { name: nameValue })
+          const res = await axios.post('/api/people', { name: nameValue })
+          console.log(res)
+          const {data} = res
           const h5 = document.createElement('h5')
           h5.textContent = data.person
           result.appendChild(h5)
